@@ -24,11 +24,21 @@ pipeline {
             }
         }   
         stage ('DeploytoStage') {
+            when {
+                expression {
+                    BRANCH_NAME ==~ /(production|staging)/
+                }
+            }
             steps {
                 echo "***** Deploying to Stage env ******"
             }
         }
         stage ('DeploytoProd') {
+            when {
+                expression {
+                    BRANCH_NAME ==~ /(production|staging)/
+                }
+            }
             steps {
                 echo "***** Deploying to Prod env ******"
             }
