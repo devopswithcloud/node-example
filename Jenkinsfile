@@ -2,17 +2,24 @@ pipeline {
     agent {
         label 'java-slave'
     }
-
     environment {
-        COURSE = "Kubernetes"
-        GITHUB_CREDS = credentials('i27devopsb8_github_pat')
+        DEPLOY_TO = 'production'
     }
     stages {
-        stage ('Build') {
+        stage ("DeployToDev") {
             steps {
-                echo "My Github Credentials are ${GITHUB_CREDS}"
-                echo "My user name is: ${GITHUB_CREDS_USR}"
-                echo "MY Password is: ${GITHUB_CREDS_PSW}"
+                echo "Deploying to dev environment"
+            }
+        }
+        stage('ProdEnv'){
+            when {
+                allOf {
+                    branch 'production'
+                    environment name: 'DEPLOY_TO', value: 'production'
+                }
+            }
+            steps {
+                echo "***** Deploying to production"
             }
         }
     }
