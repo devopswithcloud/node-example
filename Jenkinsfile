@@ -6,8 +6,12 @@ pipeline {
     stages {
         stage('DockerBuild'){
             steps {
-                sh "ls -la"
+                echo "**************** Building the docker image ****************"
+                sh "docker build -t i27devopsb8/node:v7 ."
+                echo "*************** Listing the docker images ****************"
+                sh "docker images"
             }
         }
     }
 }
+
