@@ -3,7 +3,7 @@ const app = express();
 
 //Root route
 app.get('/', (req, res) => {
-    res.send('Hello, from docker session! Siva');
+    res.send('WORKING CODE');
 });
 
 // Health check route
@@ -14,4 +14,5 @@ app.get('/health', (req, res) => {
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
+
 });
